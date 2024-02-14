@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { Request, Response, NextFunction } from 'express';
-import PRODUCTS from '../products.json';
+import { list, detail } from './api/product/product.controller';
 
 const app = express();
 
@@ -100,9 +100,9 @@ app.get('/cart-items', (req: Request, res: Response) => {
   res.json(cart);
 });
 
-app.get('/products', (req: Request, res: Response) => {
-  res.json(PRODUCTS);
-})
+app.get('/products', list)
+
+app.get('/products/:id', detail)
 
 const port = 3000;
 app.listen(port, () => {
