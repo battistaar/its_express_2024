@@ -24,7 +24,7 @@ export const add = async (req: Request, res: Response, next: NextFunction) => {
   }
 
   const saved = await cartItemService.add(newItem);
-
+  
   res.json(saved);
 }
 
