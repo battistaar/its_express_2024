@@ -1,9 +1,6 @@
+import { NotFoundError } from "../../errors/not-found";
 import { CartItem } from "./cart-item.entity";
-import productService from "../product/product.service";
-import { isPopulated } from "../../utils/is-populated-obj";
 import { CartItemModel } from "./cart-item.model";
-
-const CART: CartItem[] = [];
 
 export class CartItemService {
 
@@ -33,10 +30,6 @@ export class CartItemService {
 
     const newItem = await CartItemModel.create(item);
 
-    // const newItem = new CartItemModel(item);
-    // await newItem.save();
-
-    // const newItem = await this.getById(toAdd.id);
     return (await this.getById(newItem.id))!;
   }
 
@@ -44,10 +37,8 @@ export class CartItemService {
     
     const existing = await CartItemModel.findById(id);
     if (!existing) {
-      throw new Error('Not Found');
+      throw new NotFoundError();
     }
-
-    // const updated = await CartItemModel.findByIdAndUpdate(id, {$set: data}, {new: true});
 
     Object.assign(existing, data);
     await existing.save();
