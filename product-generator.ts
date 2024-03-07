@@ -12,7 +12,7 @@ import { writeFileSync } from 'fs';
 
 function generateRandomProduct() {
   return {
-    id: faker.database.mongodbObjectId(),
+    // id: faker.database.mongodbObjectId(),
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     netPrice: parseFloat(faker.commerce.price({max: 10000})),
