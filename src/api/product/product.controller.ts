@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import productSrv from './product.service';
 
 export const list = async (req: Request, res: Response, next: NextFunction) => {
-  const { search }: { search?: string} = req.query;
+  // const { search }: { search?: string} = req.query;
   
-  const results = await productSrv.find(search);
+  const results = await productSrv.find(req.query);
 
   res.json(results);
 }
