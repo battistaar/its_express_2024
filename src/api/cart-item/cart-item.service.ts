@@ -46,6 +46,15 @@ export class CartItemService {
     return updated!;
   }
 
+  async remove(id: string) {
+    const existing = await CartItemModel.findById(id);
+    if (!existing) {
+      throw new NotFoundError();
+    }
+
+    await CartItemModel.deleteOne({_id: id});
+  }
+
 }
 
 export default new CartItemService();

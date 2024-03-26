@@ -50,5 +50,11 @@ export const updateQuantity = async (req: Request, res: Response, next: NextFunc
 }
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
-  
+  try {
+    const { id } = req.params;
+    await cartItemService.remove(id);
+    res.send();
+  } catch(err) {
+    next(err);
+  }
 }
