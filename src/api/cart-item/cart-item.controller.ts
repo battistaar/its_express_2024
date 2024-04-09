@@ -1,3 +1,4 @@
+import { ValidationError } from './../../errors/validation';
 import { NextFunction, Request, Response } from "express";
 import productService from "../product/product.service";
 import cartItemService from './cart-item.service';
@@ -22,7 +23,7 @@ export const add = async (req: TypedRequest<CreateCartItemDTO>, res: Response, n
     const data = plainToClass(CreateCartItemDTO, req.body);
     const errors = await validate(data);
     if (errors.length) {
-      next(errors);
+      next(new ValidationError(errors));
       return;
     }
 
