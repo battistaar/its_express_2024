@@ -1,8 +1,9 @@
+import { ProductQueryDTO } from './product.dto';
 import { Product } from './product.entity';
 import { ProductModel } from './product.model';
 
 export class ProductService {
-  async find(query: any): Promise<Product[]> {
+  async find(query: ProductQueryDTO): Promise<Product[]> {
     const q: any = {};
 
     if (query.name) {
