@@ -6,8 +6,6 @@ import { CartItem } from "./cart-item.entity";
 import { NotFoundError } from "../../errors/not-found";
 import { TypedRequest } from "../../utils/typed-request";
 import { CreateCartItemDTO } from "./cart-item.dto";
-import { validate } from "class-validator";
-import { plainToClass } from "class-transformer";
 
 export const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -20,13 +18,6 @@ export const list = async (req: Request, res: Response, next: NextFunction) => {
 
 export const add = async (req: TypedRequest<CreateCartItemDTO>, res: Response, next: NextFunction) => {
   try {
-    const data = plainToClass(CreateCartItemDTO, req.body);
-    const errors = await validate(data);
-    if (errors.length) {
-      next(new ValidationError(errors));
-      return;
-    }
-
     const { productId, quantity } = req.body;
 
     //controllare che il prodotto esista
