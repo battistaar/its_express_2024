@@ -5,11 +5,11 @@ import { ValidationError } from "../errors/validation";
 import { TypedRequest } from "./typed-request";
 
 function validateFn<T extends object>(type: (new() => T))
-  : (req: TypedRequest<T>, res: Response, next: NextFunction) => Promise<void>
+  : (req: TypedRequest<T, any>, res: Response, next: NextFunction) => Promise<void>
 function validateFn<T extends object>(type: (new() => T), origin: 'body')
-  : (req: TypedRequest<T>, res: Response, next: NextFunction) => Promise<void>
+  : (req: TypedRequest<T, any>, res: Response, next: NextFunction) => Promise<void>
 function validateFn<T extends object>(type: (new() => T), origin: 'query')
-  : (req: TypedRequest<unknown, T>, res: Response, next: NextFunction) => Promise<void>
+  : (req: TypedRequest<any, T>, res: Response, next: NextFunction) => Promise<void>
 function validateFn<T extends object>(type: (new() => T), origin: 'body' | 'query' = 'body') {
   return async (req: TypedRequest<any, any>, res: Response, next: NextFunction) => {
     const data = plainToClass(type, req[origin]);

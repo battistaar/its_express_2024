@@ -5,7 +5,7 @@ import cartItemService from './cart-item.service';
 import { CartItem } from "./cart-item.entity";
 import { NotFoundError } from "../../errors/not-found";
 import { TypedRequest } from "../../utils/typed-request";
-import { CreateCartItemDTO } from "./cart-item.dto";
+import { CreateCartItemDTO, UpdateQuantityDTO } from "./cart-item.dto";
 
 export const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -39,7 +39,7 @@ export const add = async (req: TypedRequest<CreateCartItemDTO>, res: Response, n
   }
 }
 
-export const updateQuantity = async (req: Request, res: Response, next: NextFunction) => {
+export const updateQuantity = async (req: TypedRequest<UpdateQuantityDTO>, res: Response, next: NextFunction) => {
   try {
     const { quantity } = req.body;
     const { id } = req.params;

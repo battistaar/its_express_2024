@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { IsInt, IsMongoId, Min } from "class-validator";
 
 export class CreateCartItemDTO {
@@ -6,5 +7,13 @@ export class CreateCartItemDTO {
 
   @IsInt()
   @Min(1)
+  @Type(() => Number)
+  quantity: number;
+}
+
+export class UpdateQuantityDTO {
+  @IsInt()
+  @Min(1)
+  @Type(() => Number)
   quantity: number;
 }
