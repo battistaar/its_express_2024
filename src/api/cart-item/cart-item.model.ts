@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 
 const cartItemSchema = new mongoose.Schema<CartItem>({
   quantity: Number,
-  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' }
+  product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+  user: mongoose.Schema.Types.ObjectId
 });
 
 cartItemSchema.set('toJSON', {
@@ -11,6 +12,7 @@ cartItemSchema.set('toJSON', {
   transform: (_, ret) => {
     delete ret._id;
     delete ret.__v;
+    delete ret.user;
 
     return ret;
   }
